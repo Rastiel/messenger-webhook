@@ -16,5 +16,9 @@ def webhook():
         print(data)  # Gelen mesajları terminalde logla
         return "OK", 200
 
+import os
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=10000, debug=True)
+    port = int(os.environ.get("PORT", 10000))  # Varsayılan 10000, ama Render’ın sağladığı PORT varsa onu al
+    app.run(host='0.0.0.0', port=port, debug=True)
+
