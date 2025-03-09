@@ -2,23 +2,31 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-VERIFY_TOKEN = "kerembot123"
+@app.route("/", methods=["GET"])
+def home():
+    return "Messenger Webhook Çalışıyor!", 200
 
-@app.route('/webhook', methods=['GET', 'POST'])
+@app.route("/webhook", methods=["GET", "POST"])
 def webhook():
-    if request.method == 'GET':
-        if request.args.get("hub.verify_token") == VERIFY_TOKEN:
-            return request.args.get("hub.challenge")
-        return "Geçersiz doğrulama token'ı", 403
+    if request.method == "GET":
+        # Facebook webhook doğrulama isteği için
+        mode = request.args.get("hub.mode")
+        token = request.args.get("hub.verify_token")
+        challenge = request.args.get("hub.challenge")
 
-    elif request.method == 'POST':
+        if mode == "subscribe" and token == "kerembot123":
+            print("Webhook doğrulandı!")
+            return challenge, 200
+        else:
+            return "Doğrulama başarısız", 403
+
+    elif request.method == "POST":
+        # Facebook mesajları buradan alacak
         data = request.json
-        print(data)  # Gelen mesajları terminalde logla
-        return "OK", 200
+        print("Gelen mesaj:", data)
+        return "Mesaj alındı", 200
 
-import os
-
-if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 10000))  # Varsayılan 10000, ama Render’ın sağladığı PORT varsa onu al
-    app.run(host='0.0.0.0', port=port, debug=True)
-
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 10000))  # Render’ın atadığı portu al
+    app.run(host="0.0.0.0", port=port)
