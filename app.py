@@ -10,8 +10,8 @@ load_dotenv()
 app = Flask(__name__)
 
 # Facebook API için Token'lar
-VERIFY_TOKEN = os.getenv("kerembot123")  # Webhook doğrulama tokeni
-ACCESS_TOKEN = os.getenv("EAAcMzA5v2OIBO9Ja99OmglYhTE91lNM0CL3y3g2uPIF44gJKkMH6eVZAMIpC0PpAmuKrLF1GqmNzOdZACQtiz0IELCd7fGtMyPRjp8aY1OBoZADvEYuNHG2j7Hd11YyxZAAJcJhBZB5uOYj44SlVB1N8EW0vxXYmWlR3ed4POIjoNdNrCXaZCS0CtiIz5KHDA57QkIIKXTVgZDZD")  # Facebook API erişim tokeni
+VERIFY_TOKEN = os.getenv("VERIFY_TOKEN")  # Webhook doğrulama tokeni
+ACCESS_TOKEN = os.getenv("ACCESS_TOKEN")  # Facebook API erişim tokeni
 
 
 @app.route("/", methods=["GET"])
