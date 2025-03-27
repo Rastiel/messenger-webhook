@@ -17,13 +17,16 @@ def home():
 # Facebook Webhook Doğrulaması
 @app.route("/webhook", methods=["GET"])
 def verify_webhook():
+    mode = request.args.get("hub.mode")
     token_sent = request.args.get("hub.verify_token")
     challenge = request.args.get("hub.challenge")
-    if token_sent == VERIFY_TOKEN:
+
+    if mode == "subscribe" and token_sent == VERIFY_TOKEN:
         print("✅ Webhook doğrulandı!")
         return challenge, 200
-    print("❌ Webhook doğrulama hatası!")
-    return "Doğrulama başarısız", 403
+    else:
+        print("❌ Webhook doğrulama hatası!")
+        return "Doğrulama başarısız", 403
 
 # Facebook Messenger Mesajlarını Dinleme
 @app.route("/webhook", methods=["POST"])
