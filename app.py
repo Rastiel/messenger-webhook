@@ -1,8 +1,10 @@
 import os
 import json
 import requests
+from dotenv import load_dotenv
 from flask import Flask, request
 
+load_dotenv() 
 app = Flask(__name__)
 
 # Ortam değişkenlerinden erişim tokenlerini al
@@ -20,7 +22,8 @@ def verify_webhook():
     mode = request.args.get("hub.mode")
     token_sent = request.args.get("hub.verify_token")
     challenge = request.args.get("hub.challenge")
-
+    print("asd")
+    print(VERIFY_TOKEN)
     if mode == "subscribe" and token_sent == VERIFY_TOKEN:
         print("✅ Webhook doğrulandı!")
         return challenge, 200
