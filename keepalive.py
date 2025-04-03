@@ -1,7 +1,7 @@
 import requests
 import time
 
-URL = "https://messenger-webhook-uhua.onrender.com/"
+URL = "tartes.varacron.com:10000"
 
 while True:
     try:
