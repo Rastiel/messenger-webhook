@@ -7,6 +7,9 @@ WORKDIR /app
 # Gereken dosyaları kopyala (önce tüm proje dosyaları)
 COPY . .
 
+# .env dosyasını uygulama içine ayrıca kopyala
+COPY .env /app/.env
+
 # Gerekli Python kütüphanelerini yükle
 RUN pip install --no-cache-dir -r requirements.txt
 
