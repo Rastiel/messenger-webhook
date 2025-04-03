@@ -7,7 +7,7 @@ WORKDIR /app
 # Gereken dosyaları kopyala (önce tüm proje dosyaları)
 COPY . .
 
-# .env dosyasını uygulama içine ayrıca kopyala
+# .env dosyasını uygulama içine ayrıca kopyala değişiklik
 COPY .env /app/.env
 
 # Gerekli Python kütüphanelerini yükle
