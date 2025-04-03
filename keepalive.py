@@ -1,7 +1,9 @@
+# keepalive.py
 import requests
 import time
 
-URL = "tartes.varacron.com:10000"
+# URL'yi kendi sunucu adresinle güncelle
+URL = "http://localhost:10000/webhook"
 
 while True:
     try:
@@ -9,4 +11,4 @@ while True:
         print(f"Ping attık! Status Code: {response.status_code}")
     except Exception as e:
         print(f"Hata oluştu: {e}")
-    time.sleep(10)  # 10 saniyede bir çalıştır
+    time.sleep(10)
